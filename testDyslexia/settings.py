@@ -34,7 +34,7 @@ if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
     DEBUG = True
 else:
-    DEBUG = False
+    DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1:8000','https://test-dyslexia.herokuapp.com/']
 
