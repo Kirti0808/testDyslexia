@@ -1,0 +1,17 @@
+{% extends "header-footer.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+    <form class="form" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        {% if msg %}
+            {{msg}}
+            <br>
+            <br>
+        {% endif %}
+        <button type="submit" value="signup">Sign Up</button>
+    </form>
+</div>
+{% endblock %}

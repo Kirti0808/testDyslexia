@@ -1,0 +1,33 @@
+{% extends "header-footer.html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container">
+{% if UserName %}
+  <h2>{{UserName}} logged in </h2>
+{% else %}
+<div class="container">
+  <div class=container>
+  <a href="/signup"><button class="btn btn-primary mx-auto">Sign Up</button></a>
+  </div>
+  <br> 
+  <div class="container">
+    <form class="form" method="POST">
+      {% csrf_token %}
+      {{form.as_p}}
+      <!-- {% for field in form %}
+        {{field}}
+        <br>
+      {% endfor %} -->
+      {% if msg %}
+        {{msg}}
+        <br>
+        <br>
+      {% endif %}
+      <button type="submit" value="login">Login</button>
+    </form>
+  </div>
+  {% endif %}
+</div>
+</div>
+{% endblock %}
