@@ -1,8 +1,8 @@
-{% extends "header-footer.html" %}
+{% extends "header-footer(white).html" %}
 {% load staticfiles %}
 
 {% block content %}
-<div class="container">
+<div class="container" style="padding: 10rem 5rem;">
     <form class="form" method="POST">
         {% csrf_token %}
         {{form.as_p}}
@@ -11,7 +11,7 @@
             <br>
             <br>
         {% endif %}
-        <button type="submit" value="signup">Sign Up</button>
+        <button type="submit" class="btn btn-primary mx-auto" value="signup">Sign Up</button>
     </form>
 </div>
 {% endblock %}

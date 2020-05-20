@@ -1,12 +1,13 @@
-{% extends "header-footer.html" %}
+{% extends "header-footer(white).html" %}
 {% load staticfiles %}
 
 {% block content %}
-<div class="container">
 {% if UserName %}
+<div class="container" style="padding: 10rem 5rem;">
   <h2>{{UserName}} logged in </h2>
+</div>
 {% else %}
-<div class="container">
+<div class="container" style="padding: 10rem 5rem;">
   <div class=container>
   <a href="/signup"><button class="btn btn-primary mx-auto">Sign Up</button></a>
   </div>
@@ -24,10 +25,9 @@
         <br>
         <br>
       {% endif %}
-      <button type="submit" value="login">Login</button>
+      <button class="btn btn-primary mx-auto" type="submit" value="login">Login</button>
     </form>
   </div>
   {% endif %}
-</div>
 </div>
 {% endblock %}
