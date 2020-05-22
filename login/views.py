@@ -13,10 +13,27 @@ def home(request):
 	else:
 		return render(request,"login/index.html")
 
+def signup(request):
+	if 'UserName' in request.session:
+		return redirect("/")
+	else:
+		form=SignUpForm()
+		if request.method=="POST":
+			form=SignUpForm(request.POST)
+			password=request.POST.get("Password")
+			confirmPassword=request.POST.get("ConfirmPassword")
+			if password==confirmPassword:
+				if form.is_valid():
+					form.save(commit=True)
+					return redirect("login")
+			else:
+				return render(request,'login/signup.html',{'form': form,'msg':"Passwords does not match"})		
+		return render(request,'login/signup.html',{'form': form})
+
 def login(request):
 	# form=LoginForm()
 	if 'UserName' in request.session:
-		return render(request,'login/login.html',{'UserName':request.session.get("UserName")})
+		return render(request,'login/afterlogin.html',{"UserName": request.session.get("UserName")})
 	else:
 		if request.method=="POST":
 			form=LoginForm(data=request.POST)
@@ -34,22 +51,12 @@ def login(request):
 			form=LoginForm()
 		return render(request,'login/login.html',{'form':form})
 
-def signup(request):
+def test1(request):
 	if 'UserName' in request.session:
-		return redirect("/")
+		return render(request,'login/test1.html',{"UserName": request.session.get("UserName")})
 	else:
-		form=SignUpForm()
-		if request.method=="POST":
-			form=SignUpForm(request.POST)
-			password=request.POST.get("Password")
-			confirmPassword=request.POST.get("ConfirmPassword")
-			if password==confirmPassword:
-				if form.is_valid():
-					form.save(commit=True)
-					return redirect("login")
-			else:
-				return render(request,'login/signup.html',{'form': form,'msg':"Passwords does not match"})		
-		return render(request,'login/signup.html',{'form': form})
+		form=LoginForm()
+		return render(request,'login/login.html',{'form':form})
 
 def logout(request):
 	if 'UserName' in request.session:

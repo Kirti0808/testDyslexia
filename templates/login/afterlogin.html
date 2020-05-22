@@ -1,0 +1,11 @@
+{% extends "header-footer(white).html" %}
+{% load staticfiles %}
+
+{% block content %}
+<div class="container" style="padding: 10rem 0rem; text-align: center;">
+    <h2>Hey, {{UserName}}</h2>
+    <h3>Ready to take the test?</h3>
+    <p>Click on the button below and proceed to take the test</p>
+    <a href="/test1"><button type="submit" class="btn btn-primary mx-auto" value="Take-Test">Take Test</button></a>
+</div>
+{% endblock %}

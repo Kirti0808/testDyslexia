@@ -2,7 +2,7 @@
 {% load staticfiles %}
 
 {% block content %}
-<div class="container" style="padding: 10rem 5rem;">
+<div class="container" style="padding: 10rem 0rem; text-align: center;">
     <form class="form" method="POST">
         {% csrf_token %}
         {{form.as_p}}
