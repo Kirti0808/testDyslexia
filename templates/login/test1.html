@@ -7,24 +7,28 @@
   <br>
   <div class="container">
     <form method="POST">
-        <p>Please select your gender:</p>
-        <input type="radio" id="male" name="gender" value="male">
-        <label for="male">Male</label>
-        <input type="radio" id="female" name="gender" value="female">
-        <label for="female">Female</label>
-        <input type="radio" id="other" name="gender" value="other">
-        <label for="other">Other</label>
-    
-        <br><br>
-    
-        <p>Please select your age:</p>
-        <input type="radio" id="age1" name="age" value="30">
-        <label for="age1">0 - 30</label>
-        <input type="radio" id="age2" name="age" value="60">
-        <label for="age2">31 - 60</label>  
-        <input type="radio" id="age3" name="age" value="100">
-        <label for="age3">61 - 100</label><br><br>
-        <button type="submit" class="btn btn-primary mx-auto" value="Submit">Submit</button>
+      {% csrf_token %}
+      <ol>
+      {% for q in form %}
+        <li>{{q.label}}</li>
+        {{q}}
+        <!-- <div class="container">
+          <span class="col-lg-4">
+            <input type="radio" id="yes" name={{q.id}} value={{q.yes}}>
+            <label for="yes">Yes</label>
+          </span>
+          <span class="col-lg-4">
+            <input type="radio" id="no" name={{q.id}} value={{q.no}}>
+            <label for="no">No</label>
+          </span>
+          <span class="col-lg-4">
+            <input type="radio" id="notsure" name={{q.id}} value={{q.notSure}}>
+            <label for="notsure">Not Sure</label>
+          </span>
+        </div> -->
+      {% endfor %}
+      </ol>
+      <button type="submit" class="btn btn-primary mx-auto" value="Submit">Submit</button>
     </form>
   </div>  
 </div>

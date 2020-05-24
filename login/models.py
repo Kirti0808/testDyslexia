@@ -18,6 +18,34 @@ class SignUp(models.Model):
     def __str__(self):
         return self.UserName
 
-# class Test1(models.Model):
+class Test1Question(models.Model):
+    Question = models.CharField(max_length=512, null=False)
+    yes = models.IntegerField(null=False)
+    no = models.IntegerField(null=False)
+    notSure = models.IntegerField(null=False)
 
+    def __str__(self):
+        return self.Question
 
+class Test1(models.Model):
+    # qlist=Test1Question.objects.all()
+    # for q in qlist:
+    # q1=models.IntegerField(null=False)
+    # q2=models.IntegerField(null=False)
+    # q3=models.IntegerField(null=False)
+    # q4=models.IntegerField(null=False)
+    # q5=models.IntegerField(null=False)
+    # q6=models.IntegerField(null=False)
+    # q7=models.IntegerField(null=False)
+    # q8=models.IntegerField(null=False)
+    # q9=models.IntegerField(null=False)
+    # q10=models.IntegerField(null=False)
+    # q11=models.IntegerField(null=False)
+    # q12=models.IntegerField(null=False)
+    # q13=models.IntegerField(null=False)
+    # q14=models.IntegerField(null=False)
+    UserName = models.ForeignKey(SignUp, on_delete=models.CASCADE)
+    score = models.IntegerField(blank=True,null=True)  
+
+    def __str__(self):
+        return self.UserName.UserName
