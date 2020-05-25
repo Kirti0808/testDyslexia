@@ -2,7 +2,8 @@ from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
-from login.forms import SignUpForm, LoginForm, Test1Form
+from login.forms import SignUpForm, LoginForm
+# , Test1Form
 from login.models import SignUp, Test1Question, Test1
 
 def home(request):
