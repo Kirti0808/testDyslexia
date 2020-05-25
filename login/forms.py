@@ -23,9 +23,7 @@ class LoginForm(forms.Form):
     UserName = forms.CharField(required=True,widget=forms.TextInput(attrs={'placeholder': 'User name','size':'40'}))
     Password = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'placeholder': "Give your password",'size':'40'}))
 
-class Test1Form(forms.Form):
-        UserName = forms.CharField(required=True,widget=forms.TextInput(attrs={'placeholder': 'User name','size':'40'}))
-
+# class Test1Form(forms.Form):
 #     q=Test1Question.objects.get(id=1)
 #     CHOICES=[(q.yes,"Yes"), (q.no,"No"), (q.notSure,"Not Sure")]
 #     q1 = forms.ChoiceField(label=q.Question,choices=CHOICES, widget=forms.RadioSelect())
