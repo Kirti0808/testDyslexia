@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='signup',
             name='Class',
-            field=models.CharField(default=django.utils.timezone.now, max_length=10),
+            field=models.CharField(default="3", max_length=10),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='signup',
             name='Percentage',
-            field=models.IntegerField(default='69'),
+            field=models.IntegerField(default='00'),
             preserve_default=False,
         ),
         migrations.AddField(
@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='signup',
             name='Section',
-            field=models.CharField(default='A', max_length=1),
+            field=models.CharField(default='-', max_length=1),
             preserve_default=False,
         ),
     ]
