@@ -9,24 +9,10 @@
     <form method="POST">
       {% csrf_token %}
       <ol>
-      {% for q in form %}
+      <!-- {% for q in form %}
         <li>{{q.label}}</li>
         {{q}}
-        <!-- <div class="container">
-          <span class="col-lg-4">
-            <input type="radio" id="yes" name={{q.id}} value={{q.yes}}>
-            <label for="yes">Yes</label>
-          </span>
-          <span class="col-lg-4">
-            <input type="radio" id="no" name={{q.id}} value={{q.no}}>
-            <label for="no">No</label>
-          </span>
-          <span class="col-lg-4">
-            <input type="radio" id="notsure" name={{q.id}} value={{q.notSure}}>
-            <label for="notsure">Not Sure</label>
-          </span>
-        </div> -->
-      {% endfor %}
+      {% endfor %} -->
       </ol>
       <button type="submit" class="btn btn-primary mx-auto" value="Submit">Submit</button>
     </form>
