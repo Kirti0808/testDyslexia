@@ -53,7 +53,6 @@ def login(request):
 
 def test1(request):
 	if 'UserName' in request.session:
-		questions=Test1Question.objects.all()
 		form=Test1Form
 		if request.method=="POST":
 			form=Test1Form(data=request.POST)
@@ -72,7 +71,7 @@ def test1(request):
 					testUser.score=sum
 				testUser.save()
 				return redirect("/")
-		return render(request,'login/test1.html',{"UserName": request.session.get("UserName")})
+		return render(request,'login/test1.html',{"UserName": request.session.get("UserName"),"form":form})
 	else:
 		return redirect("login")
 
