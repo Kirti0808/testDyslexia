@@ -2,8 +2,7 @@ from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
-from login.forms import SignUpForm, LoginForm
-# , Test1Form
+from login.forms import SignUpForm, LoginForm, Test1Form
 from login.models import SignUp, Test1Question, Test1
 
 def home(request):
@@ -54,29 +53,28 @@ def login(request):
 
 def test1(request):
 	if 'UserName' in request.session:
-		# questions=Test1Question.objects.all()
-		# form=Test1Form
-		# if request.method=="POST":
-		# 	form=Test1Form(data=request.POST)
-		# 	if form.is_valid():
-		# 		sum=0
-		# 		for f in range (1,15):
-		# 			field="q"+str(f)
-		# 			sum=sum+int(request.POST.get(field))
-		# 		# print(sum)
-		# 		if Test1.objects.filter(UserName=SignUp.objects.get(UserName=request.session.get("UserName"))).exists():
-		# 			testUser=Test1.objects.get(UserName=SignUp.objects.get(UserName=request.session.get("UserName")))
-		# 			testUser.score=sum
-		# 		else:
-		# 			testUser=Test1()
-		# 			testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
-		# 			testUser.score=sum
-		# 		testUser.save()
-		# 		return redirect("/")
+		questions=Test1Question.objects.all()
+		form=Test1Form
+		if request.method=="POST":
+			form=Test1Form(data=request.POST)
+			if form.is_valid():
+				sum=0
+				for f in range (1,15):
+					field="q"+str(f)
+					sum=sum+int(request.POST.get(field))
+				# print(sum)
+				if Test1.objects.filter(UserName=SignUp.objects.get(UserName=request.session.get("UserName"))).exists():
+					testUser=Test1.objects.get(UserName=SignUp.objects.get(UserName=request.session.get("UserName")))
+					testUser.score=sum
+				else:
+					testUser=Test1()
+					testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
+					testUser.score=sum
+				testUser.save()
+				return redirect("/")
 		return render(request,'login/test1.html',{"UserName": request.session.get("UserName")})
 	else:
-		form=LoginForm()
-		return render(request,'login/login.html',{'form':form})
+		return redirect("login")
 
 def logout(request):
 	if 'UserName' in request.session:

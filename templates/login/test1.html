@@ -6,16 +6,16 @@
   <h2>Choose an option for each of the following questions:</h2>
   <br>
   <div class="container">
-    <!-- <form method="POST">
+    <form method="POST">
       {% csrf_token %}
-      <ol> -->
-      <!-- { for q in form %}
-        <li>{{q..label}}</li>
-        {{q62}}
-      {% endfor } -->
-      <!-- </ol>
+      <ol> 
+        {% for q in form %}
+          <li>{{q.label}}</li>
+          {{q}}
+        {% endfor %} 
+      </ol>
       <button type="submit" class="btn btn-primary mx-auto" value="Submit">Submit</button>
-    </form> -->
+    </form>
   </div>  
 </div>
 {% endblock %}
