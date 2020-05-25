@@ -11,7 +11,7 @@ class SignUp(models.Model):
     Gender = models.CharField(max_length=10,null=False)
     Age = models.IntegerField(null=False)
     Email = models.EmailField(null=False)
-    Phone = models.IntegerField(null=False)
+    # Phone = models.IntegerField(null=False)
     Percentage = models.IntegerField(null=False)
     Password = models.CharField(max_length=264,null=False)
 

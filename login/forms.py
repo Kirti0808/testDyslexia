@@ -13,7 +13,7 @@ class SignUpForm(forms.ModelForm):
             'Section': forms.TextInput(attrs={'placeholder': 'Section of your class','size':'40'}),
             'Gender': forms.TextInput(attrs={'placeholder': 'Male or Female','size':'40'}),            
             'Age': forms.TextInput(attrs={'placeholder': "Enter your age",'size':'40'}),
-            'Phone': forms.TextInput(attrs={'placeholder': 'Give your phone number(10 digits)','size':'40'}),
+            # 'Phone': forms.TextInput(attrs={'placeholder': 'Give your phone number(10 digits)','size':'40'}),
             'Email': forms.EmailInput(attrs={'placeholder': 'Give an email','size':'40'}),
             'Percentage': forms.TextInput(attrs={'placeholder': 'Percentage obtained in your last exam','size':'40'}),
             'Password': forms.PasswordInput(attrs={'placeholder': "Give a strong password",'size':'40'}),
