@@ -24,6 +24,8 @@ class LoginForm(forms.Form):
     Password = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'placeholder': "Give your password",'size':'40'}))
 
 class Test1Form(forms.Form):
+        UserName = forms.CharField(required=True,widget=forms.TextInput(attrs={'placeholder': 'User name','size':'40'}))
+
 #     q=Test1Question.objects.get(id=1)
 #     CHOICES=[(q.yes,"Yes"), (q.no,"No"), (q.notSure,"Not Sure")]
 #     q1 = forms.ChoiceField(label=q.Question,choices=CHOICES, widget=forms.RadioSelect())
@@ -79,7 +81,3 @@ class Test1Form(forms.Form):
 #     q=Test1Question.objects.get(id=14)
 #     CHOICES=[(q.yes,"Yes"), (q.no,"No"), (q.notSure,"Not Sure")]
 #     q14 = forms.ChoiceField(label=q.Question,choices=CHOICES, widget=forms.RadioSelect())
-
-    # class Meta():
-    #     model=Test1
-    #     fields= '__all__'
