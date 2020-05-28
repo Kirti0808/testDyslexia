@@ -36,9 +36,9 @@ class Test1(models.Model):
 
 class Test2(models.Model):
     UserName = models.ForeignKey(SignUp, on_delete=models.CASCADE)
-    startTime = models.DateTimeField(blank=True,null=True)  
-    endTime = models.DateTimeField(blank=True,null=True)  
-    timeReq = models.DurationField(blank=True,null=True) 
+    startTime = models.DateTimeField(blank=True,null=True,db_index=True)  
+    endTime = models.DateTimeField(blank=True,null=True,db_index=True)  
+    timeReq = models.DurationField(blank=True,null=True,db_index=True) 
 
     def calcTimediff(self):
         self.timeReq = self.endTime-self.startTime
