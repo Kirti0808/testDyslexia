@@ -1,0 +1,30 @@
+{% extends "header-footer(white).html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+{% if startTime %}
+    <div class="container" style="text-align: center; padding: 7rem 0rem;">
+        <p>Typhoon Hagibis hits Japan. It is a very big storm. It causes a lot of damage.
+            A Japanese news organization says that the typhoon kills at least 49 people. It injures more than 200 people.Rescuers are looking for survivors.
+            They expect to find more dead people. The storm hits a large area of Japan. Officials help more than 230,000 people get to safety.
+            The storm brings heavy rain, landslides, and floods. More than 100 rivers overflow.
+            In one city near Tokyo, there is a new Japanese record for the most rainfall in one day.
+        </p>
+        <p>This news is from Malaysia. A man has an ostrich.
+            He cannot keep it. It gets too big for him. He is taking it to a farm. The man and the ostrich are on a highway.
+            The ostrich escapes. Another man films the ostrich.In the end, the ostrich gets to the farm. It is safe. It is doing well.
+        </p>
+        <div style="text-align: center;padding: 0rem 0rem 7rem 0rem;">
+            <a href="/test2/stop"><button type="button" class="btn btn-primary mx-auto" value="Stop">Stop and Proceed to Test 3</button></a>
+        </div>
+    </div>
+{% else %}
+    <div class="container" style="text-align: center; padding: 7rem 0rem;">
+        <h2>After clicking on the start button, read the passage given below aloud and click on the stop button as soon as reading is completed.</h2>
+        <br>
+        <a href="/test2/start"><button type="button" class="btn btn-primary mx-auto" value="Start" onclick="showPassage()">Start</button></a>
+    </div>
+{% endif %}
+
+{% endblock %}

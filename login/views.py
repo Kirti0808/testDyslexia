@@ -1,9 +1,11 @@
 from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 from django import forms
+import datetime, json
+from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
 from login.forms import SignUpForm, LoginForm, Test1Form
-from login.models import SignUp, Test1Question, Test1
+from login.models import SignUp, Test1Question, Test1, Test2
 
 def home(request):
 	if 'UserName' in request.session:
@@ -33,7 +35,7 @@ def signup(request):
 def login(request):
 	# form=LoginForm()
 	if 'UserName' in request.session:
-		return render(request,'login/afterlogin.html',{"UserName": request.session.get("UserName")})
+		return render(request,'login/login.html',{"UserName": request.session.get("UserName")})
 	else:
 		if request.method=="POST":
 			form=LoginForm(data=request.POST)
@@ -42,7 +44,8 @@ def login(request):
 					profile=SignUp.objects.get(UserName=request.POST.get('UserName'))
 					if profile.Password==request.POST.get('Password'):
 						request.session['UserName']=profile.UserName
-						return redirect("/")
+						# request.session['Test']=0
+						return redirect("login")
 					else:
 						return render(request,'login/login.html',{'form':form,'msg':"Incorrect Password"})
 				else:
@@ -64,14 +67,58 @@ def test1(request):
 				# print(sum)
 				if Test1.objects.filter(UserName=SignUp.objects.get(UserName=request.session.get("UserName"))).exists():
 					testUser=Test1.objects.get(UserName=SignUp.objects.get(UserName=request.session.get("UserName")))
-					testUser.score=sum
 				else:
 					testUser=Test1()
 					testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
-					testUser.score=sum
+				testUser.score=sum
 				testUser.save()
-				return redirect("/")
+				# request.session['Test']=1
+				return redirect("/test2")
 		return render(request,'login/test1.html',{"UserName": request.session.get("UserName"),"form":form})
+	else:
+		return redirect("login")
+
+def test2(request):
+	if 'UserName' in request.session:
+	# and request.session.get('Test')==1:
+		if 'StartTime' not in request.session and 'EndTime' not in request.session:	
+			return render(request,"login/test2.html")	
+		elif 'StartTime' in request.session and 'EndTime' not in request.session:
+			return render(request,"login/test2.html",{"startTime":"start"})
+		else:
+			request.session['EndTime']=json.loads(request.session.get('EndTime'))
+			request.session['StartTime']=json.loads(request.session.get('StartTime'))
+			if Test2.objects.filter(UserName=SignUp.objects.get(UserName=request.session.get("UserName"))).exists():
+				testUser=Test2.objects.get(UserName=SignUp.objects.get(UserName=request.session.get("UserName")))
+			else:
+				testUser=Test2()
+				testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
+			testUser.endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			testUser.startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			Test2.calcTimediff(testUser)
+			testUser.save()
+			# request.session['Test']=2
+			del request.session['StartTime']
+			del request.session['EndTime']
+			return redirect("test3")
+	else:
+		return redirect("login")
+def test2Start(request):
+	if 'UserName' in request.session:
+		request.session['StartTime']=json.dumps(datetime.datetime.utcnow(), cls=DjangoJSONEncoder)
+		return redirect("test2")
+	else:
+		return redirect("login")
+def test2Stop(request):
+	if 'UserName' in request.session:
+		request.session['EndTime']=json.dumps(datetime.datetime.utcnow(), cls=DjangoJSONEncoder)
+		return redirect("test2")
+	else:
+		return redirect("login")
+
+def test3(request):
+	if 'UserName' in request.session:
+		return render(request,"login/test3.html")
 	else:
 		return redirect("login")
 

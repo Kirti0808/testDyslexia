@@ -2,11 +2,14 @@
 {% load staticfiles %}
 
 {% block content %}
-<!-- {% if UserName %}
-<div class="container" style="padding: 10rem 5rem;">
-  <h2>{{UserName}} logged in </h2>
+{% if UserName %}
+<div class="container" style="padding: 10rem 0rem; text-align: center;">
+  <h2>Hey, {{UserName}}</h2>
+  <h3>Ready to take the test?</h3>
+  <p>Click on the button below and proceed to take the test</p>
+  <a href="/test1"><button type="submit" class="btn btn-primary mx-auto" value="Take-Test">Take Test</button></a>
 </div>
-{% else %} -->
+{% else %}
 <div class="container" style="padding: 10rem 0rem; text-align: center;">
   <div class=container>
   <a href="/signup"><button class="btn btn-primary mx-auto">Sign Up</button></a>
@@ -28,6 +31,6 @@
       <button class="btn btn-primary mx-auto" type="submit" value="login">Login</button>
     </form>
   </div>
-  <!-- {% endif %} -->
 </div>
+{% endif %}
 {% endblock %}

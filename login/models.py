@@ -28,24 +28,21 @@ class Test1Question(models.Model):
         return self.Question
 
 class Test1(models.Model):
-    # qlist=Test1Question.objects.all()
-    # for q in qlist:
-    # q1=models.IntegerField(null=False)
-    # q2=models.IntegerField(null=False)
-    # q3=models.IntegerField(null=False)
-    # q4=models.IntegerField(null=False)
-    # q5=models.IntegerField(null=False)
-    # q6=models.IntegerField(null=False)
-    # q7=models.IntegerField(null=False)
-    # q8=models.IntegerField(null=False)
-    # q9=models.IntegerField(null=False)
-    # q10=models.IntegerField(null=False)
-    # q11=models.IntegerField(null=False)
-    # q12=models.IntegerField(null=False)
-    # q13=models.IntegerField(null=False)
-    # q14=models.IntegerField(null=False)
     UserName = models.ForeignKey(SignUp, on_delete=models.CASCADE)
     score = models.IntegerField(blank=True,null=True)  
+
+    def __str__(self):
+        return self.UserName.UserName
+
+class Test2(models.Model):
+    UserName = models.ForeignKey(SignUp, on_delete=models.CASCADE)
+    startTime = models.DateTimeField(blank=True,null=True)  
+    endTime = models.DateTimeField(blank=True,null=True)  
+    timeReq = models.DurationField(blank=True,null=True) 
+
+    def calcTimediff(self):
+        self.timeReq = self.endTime-self.startTime
+        return self
 
     def __str__(self):
         return self.UserName.UserName
