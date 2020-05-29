@@ -107,14 +107,14 @@ def test2(request):
 		return redirect("login")
 def test2Start(request):
 	if 'UserName' in request.session:
-		request.session['StartTime']=json.dumps(datetime.datetime.now(timezone.utc), cls=DjangoJSONEncoder)
+		request.session['StartTime']=json.dumps(timezone.now(), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
 		return redirect("login")
 def test2Stop(request):
 	if 'UserName' in request.session:
 		print(datetime.datetime.now(timezone.utc))
-		request.session['EndTime']=json.dumps(datetime.datetime.now(timezone.utc), cls=DjangoJSONEncoder)
+		request.session['EndTime']=json.dumps(timezone.now(), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
 		return redirect("login")

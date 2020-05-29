@@ -1,5 +1,7 @@
 from django.db import models
 import datetime
+from django.utils import timezone
+
 
 # Create your models here.
 
@@ -37,8 +39,8 @@ class Test1(models.Model):
 
 class Test2(models.Model):
     UserName = models.ForeignKey(SignUp, on_delete=models.CASCADE)
-    startTime = models.DateTimeField(default=datetime.datetime.now,db_index=True)  
-    endTime = models.DateTimeField(default=datetime.datetime.now,db_index=True)  
+    startTime = models.DateTimeField(default=timezone.now,db_index=True)  
+    endTime = models.DateTimeField(default=timezone.now,db_index=True)  
     timeReq = models.DurationField(blank=True,null=True,db_index=True) 
 
     def calcTimediff(self):
