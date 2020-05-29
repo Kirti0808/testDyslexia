@@ -93,10 +93,10 @@ def test2(request):
 			else:
 				testUser=Test2()
 				testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
-			endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f%z")
+			endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f")
 			print(testUser.endTime)
 			print(request.session['EndTime'])
-			startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f%z")
+			startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f")
 			testUser.timeReq=endTime-startTime
 			testUser.save()
 			# request.session['Test']=2
@@ -107,14 +107,14 @@ def test2(request):
 		return redirect("login")
 def test2Start(request):
 	if 'UserName' in request.session:
-		request.session['StartTime']=json.dumps(timezone.now(), cls=DjangoJSONEncoder)
+		request.session['StartTime']=json.dumps(datetime.datetime.now(), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
 		return redirect("login")
 def test2Stop(request):
 	if 'UserName' in request.session:
 		print(datetime.datetime.now(timezone.utc))
-		request.session['EndTime']=json.dumps(timezone.now(), cls=DjangoJSONEncoder)
+		request.session['EndTime']=json.dumps(datetime.datetime.now(), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
 		return redirect("login")
