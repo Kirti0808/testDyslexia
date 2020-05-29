@@ -88,17 +88,17 @@ def test2(request):
 		else:
 			request.session['EndTime']=json.loads(request.session.get('EndTime'))
 			request.session['StartTime']=json.loads(request.session.get('StartTime'))
-			if Test2.objects.filter(UserName=SignUp.objects.get(UserName=request.session.get("UserName"))).exists():
-				testUser=Test2.objects.get(UserName=SignUp.objects.get(UserName=request.session.get("UserName")))
-			else:
-				testUser=Test2()
-				testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
-			testUser.endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f")
-			print(testUser.endTime)
-			print(request.session['EndTime'])
-			testUser.startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f")
-			Test2.calcTimediff(testUser)
-			testUser.save()
+			# if Test2.objects.filter(UserName=SignUp.objects.get(UserName=request.session.get("UserName"))).exists():
+			# 	testUser=Test2.objects.get(UserName=SignUp.objects.get(UserName=request.session.get("UserName")))
+			# else:
+			# 	testUser=Test2()
+			# 	testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
+			# testUser.endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			# print(testUser.endTime)
+			# print(request.session['EndTime'])
+			# testUser.startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			# Test2.calcTimediff(testUser)
+			# testUser.save()
 			# request.session['Test']=2
 			del request.session['StartTime']
 			del request.session['EndTime']
