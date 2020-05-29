@@ -93,11 +93,11 @@ def test2(request):
 			else:
 				testUser=Test2()
 				testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
-			endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			testUser.endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f")
 			print(testUser.endTime)
 			print(request.session['EndTime'])
-			startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f")
-			testUser.timeReq=endTime-startTime
+			testUser.startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			Test2.calcTimediff(testUser)
 			testUser.save()
 			# request.session['Test']=2
 			del request.session['StartTime']
