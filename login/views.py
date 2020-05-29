@@ -1,8 +1,8 @@
 from django.shortcuts import render,HttpResponse,redirect,HttpResponseRedirect
 from django import forms
 import datetime, json
+from django.utils import timezone
 from django.core.serializers.json import DjangoJSONEncoder
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import logout as auth_logout
 from login.forms import SignUpForm, LoginForm, Test1Form
 from login.models import SignUp, Test1Question, Test1, Test2
@@ -93,8 +93,10 @@ def test2(request):
 			else:
 				testUser=Test2()
 				testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
-			testUser.endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f")
-			testUser.startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			testUser.endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f%z")
+			print(testUser.endTime)
+			print(request.session['EndTime'])
+			testUser.startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f%z")
 			Test2.calcTimediff(testUser)
 			testUser.save()
 			# request.session['Test']=2
@@ -105,13 +107,14 @@ def test2(request):
 		return redirect("login")
 def test2Start(request):
 	if 'UserName' in request.session:
-		request.session['StartTime']=json.dumps(datetime.datetime.utcnow(), cls=DjangoJSONEncoder)
+		request.session['StartTime']=json.dumps(datetime.datetime.now(timezone.utc), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
 		return redirect("login")
 def test2Stop(request):
 	if 'UserName' in request.session:
-		request.session['EndTime']=json.dumps(datetime.datetime.utcnow(), cls=DjangoJSONEncoder)
+		print(datetime.datetime.now(timezone.utc))
+		request.session['EndTime']=json.dumps(datetime.datetime.now(timezone.utc), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
 		return redirect("login")
