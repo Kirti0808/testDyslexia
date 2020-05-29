@@ -105,13 +105,13 @@ def test2(request):
 		return redirect("login")
 def test2Start(request):
 	if 'UserName' in request.session:
-		request.session['StartTime']=json.dumps(datetime.datetime.now(), cls=DjangoJSONEncoder)
+		request.session['StartTime']=json.dumps(datetime.datetime.utcnow(), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
 		return redirect("login")
 def test2Stop(request):
 	if 'UserName' in request.session:
-		request.session['EndTime']=json.dumps(datetime.datetime.now(), cls=DjangoJSONEncoder)
+		request.session['EndTime']=json.dumps(datetime.datetime.utcnow(), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
 		return redirect("login")
