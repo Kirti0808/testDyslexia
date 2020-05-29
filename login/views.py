@@ -97,7 +97,7 @@ def test2(request):
 			print(testUser.endTime)
 			print(request.session['EndTime'])
 			testUser.startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f%z")
-			Test2.calcTimediff(testUser)
+			# Test2.calcTimediff(testUser)
 			testUser.save()
 			# request.session['Test']=2
 			del request.session['StartTime']

@@ -41,11 +41,11 @@ class Test2(models.Model):
     UserName = models.ForeignKey(SignUp, on_delete=models.CASCADE)
     startTime = models.DateTimeField(default=timezone.now,db_index=True)  
     endTime = models.DateTimeField(default=timezone.now,db_index=True)  
-    timeReq = models.DurationField(blank=True,null=True,db_index=True) 
+    # timeReq = models.DurationField(blank=True,null=True,db_index=True) 
 
-    def calcTimediff(self):
-        self.timeReq = self.endTime-self.startTime
-        return self
+    # def calcTimediff(self):
+    #     self.timeReq = self.endTime-self.startTime
+    #     return self
 
     def __str__(self):
         return self.UserName.UserName
