@@ -4,13 +4,13 @@ import datetime, json
 from django.utils import timezone
 from django.core.serializers.json import DjangoJSONEncoder
 from django.contrib.auth import logout as auth_logout
-from login.forms import SignUpForm, LoginForm, Test1Form
+from login.forms import LoginForm, SignUpForm, Test1Form
 from login.models import SignUp, Test1Question, Test1, Test2
 
 def home(request):
 	if 'UserName' in request.session:
 		UserName=request.session.get("UserName")
-		print(UserName+"homeview()")
+		# print(UserName+"homeview()")
 		return render(request,"login/index.html",{'UserName':UserName})		
 	else:
 		return render(request,"login/index.html")
@@ -82,21 +82,24 @@ def test2(request):
 	if 'UserName' in request.session:
 	# and request.session.get('Test')==1:
 		if 'StartTime' not in request.session and 'EndTime' not in request.session:	
-			return render(request,"login/test2.html")	
+			return render(request,"login/test2.html",{"UserName": request.session.get("UserName")})	
 		elif 'StartTime' in request.session and 'EndTime' not in request.session:
-			return render(request,"login/test2.html",{"startTime":"start"})
+			return render(request,"login/test2.html",{"UserName": request.session.get("UserName"),"startTime":"start"})
 		else:
 			request.session['EndTime']=json.loads(request.session.get('EndTime'))
 			request.session['StartTime']=json.loads(request.session.get('StartTime'))
+			# print(Test2.objects.all())
 			if Test2.objects.filter(UserName=SignUp.objects.get(UserName=request.session.get("UserName"))).exists():
 				testUser=Test2.objects.get(UserName=SignUp.objects.get(UserName=request.session.get("UserName")))
 			else:
 				testUser=Test2()
 				testUser.UserName=SignUp.objects.get(UserName=request.session.get("UserName"))
 			endTime=datetime.datetime.strptime(request.session['EndTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			# testUser.endTime=endTime
 			# print(testUser.endTime)
-			print(request.session['EndTime'])
+			# print(request.session['EndTime'])
 			startTime=datetime.datetime.strptime(request.session['StartTime'], "%Y-%m-%dT%H:%M:%S.%f")
+			# testUser.startTime=startTime
 			testUser.timeReq=endTime-startTime
 			testUser.save()
 			# request.session['Test']=2
@@ -113,7 +116,7 @@ def test2Start(request):
 		return redirect("login")
 def test2Stop(request):
 	if 'UserName' in request.session:
-		print(datetime.datetime.now(timezone.utc))
+		# print(datetime.datetime.now(timezone.utc))
 		request.session['EndTime']=json.dumps(datetime.datetime.now(), cls=DjangoJSONEncoder)
 		return redirect("test2")
 	else:
@@ -121,7 +124,7 @@ def test2Stop(request):
 
 def test3(request):
 	if 'UserName' in request.session:
-		return render(request,"login/test3.html")
+		return render(request,"login/test3.html",{"UserName": request.session.get("UserName")})
 	else:
 		return redirect("login")
 
